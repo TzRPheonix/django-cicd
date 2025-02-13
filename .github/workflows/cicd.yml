@@ -3,11 +3,11 @@ name: Django CI/CD
 on:
   push:
     branches:
-      - main
-      - dev
+      - prod
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/prod'
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le code
@@ -29,20 +29,15 @@ jobs:
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/prod'  # Ignore dev, exécute seulement sur prod
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
       - name: Login à Docker Hub
         run: |
-          if [ -n "${{ secrets.DOCKER_USERNAME }}" ] && [ -n "${{ secrets.DOCKER_PASSWORD }}" ]; then
-            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          else
-            echo "🚨 ERREUR: Les secrets DOCKER_USERNAME et DOCKER_PASSWORD ne sont pas définis."
-            exit 1
-          fi
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin || exit 1
 
       - name: Construire et Pousser l’image Docker
         run: |
@@ -50,9 +45,14 @@ jobs:
           docker tag my-django-app ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
 
-      - name: Déployer l’application avec Docker Compose
-        run: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
-          docker stop my-django-app || true
-          docker rm my-django-app || true
-          docker run -d -p 8000:8000 --name my-django-app ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
+      - name: Déployer sur le serveur distant via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
+            docker stop my-django-app || true
+            docker rm my-django-app || true
+            docker run -d -p 8000:8000 --name my-django-app ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
