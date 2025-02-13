@@ -33,6 +33,16 @@ jobs:
         run: |
           sphinx-build -b html docs/source docs/build
 
+      - name: Enregistrer les artefacts des tests et de la documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports-and-docs
+          path: |
+            test_results.txt
+            flake8_report.txt
+            bandit_report.txt
+            docs/build/html/
+
   build:
     if: github.ref == 'refs/heads/prod'
     runs-on: ubuntu-latest
