@@ -27,9 +27,9 @@ router.register(r'tasks', TaskViewSet, basename="task")
 
 # ✅ Routes HTML et API
 urlpatterns = [
-    path("tasks/", task_list, name="task-list"),  # Page HTML avec les tâches
-    path("tasks/add/", task_create, name="task-create"),  # Ajout d'une tâche via HTMX
-    path("tasks/delete/<int:task_id>/", task_delete, name="task-delete"),  # Suppression
-    path("tasks/update/<int:task_id>/", task_update, name="task-update"),  # Modification
-    path("", include(router.urls)),  # API REST
+    path("", include(router.urls)),
+    path("tasks/", task_list, name="task-html-list"),
+    path("tasks/add/", task_create, name="task-create"),
+    path("tasks/delete/<int:task_id>/", task_delete, name="task-delete"),
+    path("tasks/update/<int:task_id>/", task_update, name="task-update"),
 ]
