@@ -36,17 +36,23 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Login à Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: |
+          if [ -n "${{ secrets.DOCKER_USERNAME }}" ] && [ -n "${{ secrets.DOCKER_PASSWORD }}" ]; then
+            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          else
+            echo "🚨 ERREUR: Les secrets DOCKER_USERNAME et DOCKER_PASSWORD ne sont pas définis."
+            exit 1
+          fi
 
       - name: Construire et Pousser l’image Docker
         run: |
           docker build -t my-django-app .
-          docker tag my-django-app mydockerhubusername/my-django-app:latest
-          docker push mydockerhubusername/my-django-app:latest
+          docker tag my-django-app ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
 
       - name: Déployer l’application avec Docker Compose
         run: |
-          docker pull mydockerhubusername/my-django-app:latest
+          docker pull ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
           docker stop my-django-app || true
           docker rm my-django-app || true
-          docker run -d -p 8000:8000 --name my-django-app mydockerhubusername/my-django-app:latest
+          docker run -d -p 8000:8000 --name my-django-app ${{ secrets.DOCKER_USERNAME }}/my-django-app:latest
