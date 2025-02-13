@@ -14,7 +14,7 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
-      - name: Installer Python et dépendances
+      - name: Installer Pythonche et dépendances
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
