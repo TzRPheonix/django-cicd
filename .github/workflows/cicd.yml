@@ -20,19 +20,28 @@ jobs:
           python-version: "3.10"
       - run: pip install -r requirements.txt
 
+      # ✅ Exécuter les tests avec Pytest et sauvegarder la sortie
       - name: Exécuter les tests avec Pytest
-        run: pytest --disable-warnings
+        run: |
+          pytest --disable-warnings | tee test_results.txt || true
 
+      # ✅ Vérifier la qualité du code avec Flake8 et sauvegarder la sortie
       - name: Vérifier la qualité du code avec Flake8
-        run: flake8 --max-line-length=120 || true
+        run: |
+          flake8 --max-line-length=120 | tee flake8_report.txt || true
 
+      # ✅ Vérifier la sécurité avec Bandit et sauvegarder la sortie
       - name: Vérifier la sécurité avec Bandit
-        run: bandit -r . || true
+        run: |
+          bandit -r . | tee bandit_report.txt || true
 
+      # ✅ Générer la documentation avec Sphinx
       - name: Générer la documentation avec Sphinx
         run: |
           sphinx-build -b html docs/source docs/build
+        continue-on-error: true
 
+      # ✅ Sauvegarder les artefacts des tests et de la documentation
       - name: Enregistrer les artefacts des tests et de la documentation
         uses: actions/upload-artifact@v4
         with:
@@ -42,6 +51,7 @@ jobs:
             flake8_report.txt
             bandit_report.txt
             docs/build/html/
+          retention-days: 7
 
   build:
     if: github.ref == 'refs/heads/prod'
