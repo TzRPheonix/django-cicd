@@ -23,13 +23,13 @@ from .views import TaskViewSet, task_list, task_create, task_delete, task_update
 
 # ✅ API REST avec Django REST Framework
 router = DefaultRouter()
-router.register(r'tasks', TaskViewSet)
+router.register(r'tasks', TaskViewSet, basename="task")
 
 # ✅ Routes HTML et API
 urlpatterns = [
-    path("tasks/", task_list, name="task-list"),  # Page HTML avec les tâches
-    path("tasks/add/", task_create, name="task-create"),  # Ajout d'une tâche via HTMX
-    path("tasks/delete/<int:task_id>/", task_delete, name="task-delete"),  # Suppression
-    path("tasks/update/<int:task_id>/", task_update, name="task-update"),  # Modification
-    path("", include(router.urls)),  # API REST
+    path("api/", include(router.urls)),  # ✅ Met l'API REST sous `/api/` pour éviter `/tasks/tasks/`
+    path("tasks/", task_list, name="task-html-list"),  # ✅ Interface HTML HTMX
+    path("tasks/add/", task_create, name="task-create"),
+    path("tasks/delete/<int:task_id>/", task_delete, name="task-delete"),
+    path("tasks/update/<int:task_id>/", task_update, name="task-update"),
 ]
