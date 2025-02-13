@@ -30,7 +30,7 @@ services:
     depends_on:
       - web
     ports:
-      - "80:80"
+      - "80:80"  # Changer de 8080 à 80 pour qu'il serve directement
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
 

@@ -23,7 +23,7 @@ from .views import TaskViewSet, task_list, task_create, task_delete, task_update
 
 # ✅ API REST avec Django REST Framework
 router = DefaultRouter()
-router.register(r'tasks', TaskViewSet)
+router.register(r'tasks', TaskViewSet, basename="task")
 
 # ✅ Routes HTML et API
 urlpatterns = [
