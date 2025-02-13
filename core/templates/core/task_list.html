@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<!-- Formulaire d'ajout -->
+<form hx-post="{% url 'task-create' %}" hx-target="#task-list" hx-swap="beforeend"
+      class="mb-4 flex space-x-2">
+    <input type="text" name="title" placeholder="Nouvelle tâche"
+           class="border p-2 flex-grow">
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Ajouter</button>
+</form>
+
+<!-- Liste des tâches -->
+<ul id="task-list">
+    {% for task in tasks %}
+        {% include "core/task_item.html" %}
+    {% empty %}
+        <li id="empty-message" class="text-gray-500">Aucune tâche.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.body.addEventListener('htmx:afterSwap', function(evt) {
+        let taskList = document.getElementById("task-list");
+        let emptyMessage = document.getElementById("empty-message");
+
+        if (taskList.children.length > 0) {
+            if (emptyMessage) emptyMessage.style.display = "none";  // ✅ Cache le message
+        } else {
+            if (emptyMessage) emptyMessage.style.display = "block"; // ✅ Affiche si plus de tâches
+        }
+    });
+</script>
+{% endblock %}

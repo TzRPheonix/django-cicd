@@ -1,0 +1,15 @@
+# Environnements virtuels
+venv/
+__pycache__/
+
+# Bases de données locales
+*.sqlite3
+
+# Fichiers Django spécifiques
+/media/
+/static/
+*.log
+
+# Configurations IDE
+.idea/
+.vscode/

@@ -1,0 +1,7 @@
+<ul id="task-list">
+    {% for task in tasks %}
+        {% include "core/task_item.html" %}
+    {% empty %}
+        <li id="empty-message" class="text-gray-500">Aucune tâche.</li>
+    {% endfor %}
+</ul>

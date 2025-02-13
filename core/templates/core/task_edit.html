@@ -1,0 +1,8 @@
+<li id="task-{{ task.id }}" class="p-2 border-b flex justify-between items-center">
+    <form hx-post="{% url 'task-update' task.id %}" hx-target="#task-{{ task.id }}" hx-swap="outerHTML"
+          class="flex space-x-2 w-full">
+        <input type="text" name="title" value="{{ task.title }}"
+               class="border p-2 flex-grow">
+        <button type="submit" class="bg-green-500 text-white p-2 rounded">✅</button>
+    </form>
+</li>

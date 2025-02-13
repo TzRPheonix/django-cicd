@@ -1,0 +1,17 @@
+<li id="task-{{ task.id }}" class="p-2 border-b flex justify-between items-center">
+    <!-- Titre cliquable pour édition -->
+    <span hx-get="{% url 'task-update' task.id %}" hx-trigger="dblclick click"
+          hx-target="#task-{{ task.id }}" hx-swap="outerHTML">
+        {{ task.title }}
+    </span>
+
+    <div class="flex space-x-2">
+        <!-- Bouton Modifier -->
+        <button hx-get="{% url 'task-update' task.id %}" hx-target="#task-{{ task.id }}"
+                hx-swap="outerHTML" class="text-blue-500">✏️</button>
+
+        <!-- Bouton Supprimer -->
+        <button hx-delete="{% url 'task-delete' task.id %}" hx-target="#task-{{ task.id }}"
+                hx-swap="outerHTML" class="text-red-500">❌</button>
+    </div>
+</li>

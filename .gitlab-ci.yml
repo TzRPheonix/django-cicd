@@ -1,0 +1,56 @@
+stages:
+  - lint
+  - test
+  - docs
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: "registry.gitlab.com/<votre-namespace>/django-cicd"
+  DJANGO_SETTINGS_MODULE: "myproject.settings"
+  DATABASE_URL: "postgres://django_user:django_password@db:5432/django_db"
+
+before_script:
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
+
+lint:
+  stage: lint
+  script:
+    - flake8 --ignore=E501 core
+    - bandit -r core
+
+test:
+  stage: test
+  services:
+    - postgres:13
+  script:
+    - python manage.py migrate
+    - pytest
+
+docs:
+  stage: docs
+  script:
+    - sphinx-build -b html docs/source docs/build/html
+  artifacts:
+    paths:
+      - docs/build/html
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_NAME:latest .
+    - docker save -o django-cicd.tar $IMAGE_NAME:latest
+  artifacts:
+    paths:
+      - django-cicd.tar
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$CI_COMMIT_REF_NAME
+    - docker push $IMAGE_NAME:$CI_COMMIT_REF_NAME
