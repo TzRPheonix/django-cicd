@@ -3,9 +3,36 @@ name: Django CI/CD
 on:
   push:
     branches:
+      - dev
       - prod
 
 jobs:
+  tests:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v3
+
+      - name: Installer Python et dépendances
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - run: pip install -r requirements.txt
+
+      - name: Exécuter les tests avec Pytest
+        run: pytest --disable-warnings
+
+      - name: Vérifier la qualité du code avec Flake8
+        run: flake8 --max-line-length=120
+
+      - name: Vérifier la sécurité avec Bandit
+        run: bandit -r .
+
+      - name: Générer la documentation avec Sphinx
+        run: |
+          sphinx-build -b html docs/source docs/build
+
   build:
     if: github.ref == 'refs/heads/prod'
     runs-on: ubuntu-latest
