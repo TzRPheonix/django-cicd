@@ -50,7 +50,7 @@ jobs:
             test_results.txt
             flake8_report.txt
             bandit_report.txt
-            docs/build/html/
+            docs/build/
           retention-days: 7
 
   build:
