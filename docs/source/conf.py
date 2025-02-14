@@ -7,6 +7,7 @@ import django
 # Ajuste le chemin du projet Django pour Sphinx
 sys.path.insert(0, os.path.abspath('../../'))
 sys.path.insert(0, os.path.abspath('../../myproject'))
+sys.path.insert(0, os.path.abspath('../../core'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
 django.setup()
 
