@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.serializers &mdash; Django-CI/CD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Django-CI/CD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table des matières</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../generated/modules.html">core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/core.html">core package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.migrations.html">core.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.models">core.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.models.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.serializers">core.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.serializers.TaskSerializer"><code class="docutils literal notranslate"><span class="pre">TaskSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.tests">core.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.tests.test_create_task"><code class="docutils literal notranslate"><span class="pre">test_create_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.tests.test_delete_task"><code class="docutils literal notranslate"><span class="pre">test_delete_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.tests.test_get_empty_task_list"><code class="docutils literal notranslate"><span class="pre">test_get_empty_task_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.tests.test_get_specific_task"><code class="docutils literal notranslate"><span class="pre">test_get_specific_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.tests.test_update_task"><code class="docutils literal notranslate"><span class="pre">test_update_task()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.urls">core.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core.views">core.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.TaskViewSet"><code class="docutils literal notranslate"><span class="pre">TaskViewSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.task_create"><code class="docutils literal notranslate"><span class="pre">task_create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.task_delete"><code class="docutils literal notranslate"><span class="pre">task_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.task_list"><code class="docutils literal notranslate"><span class="pre">task_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/core.html#core.views.task_update"><code class="docutils literal notranslate"><span class="pre">task_update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/core.html#module-core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../generated/manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../generated/myproject.html">myproject package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#module-myproject.asgi">myproject.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#module-myproject.settings">myproject.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#module-myproject.urls">myproject.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#module-myproject.wsgi">myproject.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../generated/myproject.html#module-myproject">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/core/index.html">core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/core/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/apps/index.html">core.apps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/models/index.html">core.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/serializers/index.html">core.serializers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/tests/index.html">core.tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/urls/index.html">core.urls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/core/views/index.html">core.views</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/myproject/index.html">myproject</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/myproject/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/myproject/asgi/index.html">myproject.asgi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/myproject/settings/index.html">myproject.settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/myproject/urls/index.html">myproject.urls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/myproject/wsgi/index.html">myproject.wsgi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Django-CI/CD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">core.serializers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for core.serializers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+
+
+<div class="viewcode-block" id="TaskSerializer">
+<a class="viewcode-back" href="../../autoapi/core/serializers/index.html#core.serializers.TaskSerializer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskSerializer.Meta">
+<a class="viewcode-back" href="../../autoapi/core/serializers/index.html#core.serializers.TaskSerializer.Meta">[docs]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Task</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TzRPheonix.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
