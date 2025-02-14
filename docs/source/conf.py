@@ -6,6 +6,7 @@ import django
 
 # Ajuste le chemin du projet Django pour Sphinx
 sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../../myproject'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
 django.setup()
 
@@ -30,11 +31,11 @@ autosummary_generate = True
 
 # Options de génération automatique de la documentation
 autodoc_default_options = {
-    'members': True,          # Inclut les classes/fonctions/méthodes
-    'undoc-members': True,    # Inclut même celles sans docstring
-    'show-inheritance': True, # Affiche l'héritage des classes
-    'no-index': True,         # ✅ Évite les erreurs de duplication
-    'special-members': '__init__',  # Inclut les constructeurs
+    'members': True,
+    'undoc-members': True,
+    'show-inheritance': True,
+    'no-index': True,
+    'special-members': '__init__',
 }
 
 # -- Options pour Intersphinx --------------------------------------------------
@@ -57,12 +58,12 @@ html_static_path = ['_static']
 html_theme_options = {
     "navigation_depth": 4,  # Affiche plus de niveaux de navigation
     "collapse_navigation": False,  # Garde le menu toujours ouvert
-    "sticky_navigation": True,  # Fixe la barre de navigation
+    "sticky_navigation": True,s
 }
 
 # -- Options des TODOs ---------------------------------------------------------
-todo_include_todos = True  # ✅ Affiche les TODOs dans la documentation
+todo_include_todos = True
 
 # -- Options pour les annotations de type et l'héritage ------------------------
-autodoc_typehints = "description"  # ✅ Affiche les annotations de type
-autodoc_inherit_docstrings = True  # ✅ Hérite des docstrings parent
+autodoc_typehints = "description"
+autodoc_inherit_docstrings = True
