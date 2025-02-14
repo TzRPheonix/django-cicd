@@ -58,7 +58,7 @@ html_static_path = ['_static']
 html_theme_options = {
     "navigation_depth": 4,  # Affiche plus de niveaux de navigation
     "collapse_navigation": False,  # Garde le menu toujours ouvert
-    "sticky_navigation": True,s
+    "sticky_navigation": True,
 }
 
 # -- Options des TODOs ---------------------------------------------------------
