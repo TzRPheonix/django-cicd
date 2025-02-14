@@ -2,8 +2,8 @@
 Module des vues pour l'API et l'interface web des tâches.
 
 Ce module définit :
-1️⃣ Un **ViewSet API REST** basé sur Django REST Framework.
-2️⃣ Une **interface HTML** améliorée avec HTMX pour un CRUD dynamique.
+Un **ViewSet API REST** basé sur Django REST Framework.
+Une **interface HTML** avec HTMX pour un CRUD dynamique.
 """
 
 from django.shortcuts import render, get_object_or_404
@@ -14,7 +14,7 @@ from .models import Task
 from .serializers import TaskSerializer
 
 
-# ✅ 1️⃣ API REST avec Django REST Framework
+# 1 API REST avec Django REST Framework
 class TaskViewSet(viewsets.ModelViewSet):
     """
     ViewSet pour gérer les tâches via l'API REST.
@@ -34,7 +34,7 @@ def home(request):
     """Page d'accueil avec un menu de navigation."""
     return render(request, "core/home.html")
 
-# ✅ 2️⃣ Interface Web - Afficher la Liste des Tâches
+# 2 Interface Web - Afficher la Liste des Tâches
 def task_list(request):
     """
     Affiche une page HTML avec toutes les tâches sous forme de liste.
@@ -46,7 +46,7 @@ def task_list(request):
     return render(request, "core/task_list.html", {"tasks": tasks})
 
 
-# ✅ 3️⃣ Interface Web - Ajouter une Tâche via HTMX
+# 3 Interface Web - Ajouter une Tâche via HTMX
 @csrf_exempt
 def task_create(request):
     """
@@ -62,7 +62,7 @@ def task_create(request):
     return HttpResponse(status=400)
 
 
-# ✅ 4️⃣ Interface Web - Supprimer une Tâche via HTMX
+# 4 Interface Web - Supprimer une Tâche via HTMX
 @csrf_exempt
 def task_delete(request, task_id):
     """
@@ -73,13 +73,13 @@ def task_delete(request, task_id):
 
     if "HX-Request" in request.headers:
         tasks = Task.objects.all()
-        return render(request, "core/task_list_partial.html", {"tasks": tasks})  # ✅ Nouveau template PARTIEL
+        return render(request, "core/task_list_partial.html", {"tasks": tasks})
 
-    return HttpResponse("", status=204)  # ✅ Retour par défaut si ce n'est pas HTMX
+    return HttpResponse("", status=204)
 
 
 
-# ✅ 5️⃣ Interface Web - Modifier une Tâche via HTMX
+# 5 Interface Web - Modifier une Tâche via HTMX
 @csrf_exempt
 def task_update(request, task_id):
     """
@@ -96,6 +96,6 @@ def task_update(request, task_id):
             task.title = title
             task.save()
             return render(request, "core/task_item.html", {"task": task})
-        return HttpResponse(status=400)  # Si titre vide
+        return HttpResponse(status=400)
 
     return render(request, "core/task_edit.html", {"task": task})

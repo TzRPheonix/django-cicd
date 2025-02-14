@@ -21,14 +21,14 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import TaskViewSet, task_list, task_create, task_delete, task_update
 
-# ✅ API REST avec Django REST Framework
+# API REST avec Django REST Framework
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet, basename="task")
 
-# ✅ Routes HTML et API
-urlpatterns = [
-    path("api/", include(router.urls)),  # ✅ Met l'API REST sous `/api/` pour éviter `/tasks/tasks/`
-    path("tasks/", task_list, name="task-html-list"),  # ✅ Interface HTML HTMX
+    # Routes HTML et API
+    urlpatterns = [
+    path("api/", include(router.urls)),
+    path("tasks/", task_list, name="task-html-list"),
     path("tasks/add/", task_create, name="task-create"),
     path("tasks/delete/<int:task_id>/", task_delete, name="task-delete"),
     path("tasks/update/<int:task_id>/", task_update, name="task-update"),

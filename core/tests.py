@@ -30,7 +30,6 @@ def test_create_task():
 
 @pytest.mark.django_db
 def test_get_specific_task():
-    """Vérifie qu'on peut récupérer une tâche spécifique par son ID."""
     client = APIClient()
     task = Task.objects.create(title="Tâche Test", description="Détails de la tâche", completed=False)
     url = reverse("task-detail", kwargs={"pk": task.id})
@@ -43,7 +42,6 @@ def test_get_specific_task():
 
 @pytest.mark.django_db
 def test_update_task():
-    """Test la modification d'une tâche existante."""
     client = APIClient()
     task = Task.objects.create(title="Tâche Initiale", description="À modifier", completed=False)
     url = reverse("task-detail", kwargs={"pk": task.id})
@@ -60,7 +58,6 @@ def test_update_task():
 
 @pytest.mark.django_db
 def test_delete_task():
-    """Test la suppression d'une tâche existante."""
     client = APIClient()
     task = Task.objects.create(title="Tâche à Supprimer", description="Doit être supprimée", completed=False)
     url = reverse("task-detail", kwargs={"pk": task.id})
@@ -68,4 +65,4 @@ def test_delete_task():
     response = client.delete(url)
 
     assert response.status_code == 204
-    assert Task.objects.count() == 0  # Vérifie que la tâche a bien été supprimée
+    assert Task.objects.count() == 0
