@@ -58,6 +58,7 @@ def test_update_task():
 
 @pytest.mark.django_db
 def test_delete_task():
+    """OUAAAAAAAAAAAAAAAAAAAAAIS."""
     client = APIClient()
     task = Task.objects.create(title="Tâche à Supprimer", description="Doit être supprimée", completed=False)
     url = reverse("task-detail", kwargs={"pk": task.id})
